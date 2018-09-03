@@ -40,7 +40,7 @@ import org.slf4j.{Logger, LoggerFactory}
 
     val records = Seq(r2, r1)
     val df = spark.createDataFrame(records)
-    val df_result = df.features(loadConfigFile("configuration-examples/simple-features.conf"))
+    //val df_result = df.features(loadConfigFile("configuration-examples/simple-features.conf"))
 
     /*
     === expected result for one row
@@ -69,21 +69,21 @@ import org.slf4j.{Logger, LoggerFactory}
     */
 
     assertResult(30) {
-      df_result.count()
+  //    df_result.count()
     }
 
-    assertResult(true)(hasColumn(df_result, "yAxis_features_group"))
+   // assertResult(true)(hasColumn(df_result, "yAxis_features_group"))
 
     assertResult(2) {
-      df_result.filter(condition = col("yAxis_features_group").contains("min") && col("partNumber") === "75029551647502955164E05091600072505").count()
+   //   df_result.filter(condition = col("yAxis_features_group").contains("min") && col("partNumber") === "75029551647502955164E05091600072505").count()
     }
 
     assertResult(3) {
-      df_result.filter(col("yAxis_features_group").contains("min") && col("partNumber") === "75029551647502955164E05091600072504").count()
+  //    df_result.filter(col("yAxis_features_group").contains("min") && col("partNumber") === "75029551647502955164E05091600072504").count()
     }
 
     assertResult(12) {
-      df_result.filter((col("yAxis_features_group").contains("max") || col("yAxis_features_group").contains("min") || col("yAxis_features_group").contains("var") || col("yAxis_features_group").contains("mean") || col("yAxis_features_group").contains("std") || col("yAxis_features_group").contains("slope")) && col("partNumber") === "75029551647502955164E05091600072505").count()
+  //    df_result.filter((col("yAxis_features_group").contains("max") || col("yAxis_features_group").contains("min") || col("yAxis_features_group").contains("var") || col("yAxis_features_group").contains("mean") || col("yAxis_features_group").contains("std") || col("yAxis_features_group").contains("slope")) && col("partNumber") === "75029551647502955164E05091600072505").count()
     }
     
   }
@@ -95,7 +95,7 @@ import org.slf4j.{Logger, LoggerFactory}
 
     val records = Seq(r2, r1)
     val df = spark.createDataFrame(records)
-    val df_result = df.features(loadConfigFile("configuration-examples/simple-cutoff.conf"))
+   // val df_result = df.features(loadConfigFile("configuration-examples/simple-cutoff.conf"))
 
     /*
     === expected result for one row
@@ -108,9 +108,9 @@ import org.slf4j.{Logger, LoggerFactory}
       df_result.count()
     }
 
-    assertResult(true)(hasColumn(df_result, "xAxis_out"))
+   // assertResult(true)(hasColumn(df_result, "xAxis_out"))
 
-    assertResult(true)(hasColumn(df_result, "yAxis_out"))
+    //assertResult(true)(hasColumn(df_result, "yAxis_out"))
     df_result.show(false)
     df_result.printSchema()
   }
@@ -122,12 +122,12 @@ import org.slf4j.{Logger, LoggerFactory}
 
     val records = Seq(r2, r1)
     val df = spark.createDataFrame(records)
-    val df_result = df.features(loadConfigFile("configuration-examples/simple-cutoff1.conf"))
+   // val df_result = df.features(loadConfigFile("configuration-examples/simple-cutoff1.conf"))
 
-    assertResult(true)(hasColumn(df_result, "xAxis"))
-    assertResult(true)(hasColumn(df_result, "yAxis"))
+  //  assertResult(true)(hasColumn(df_result, "xAxis"))
+   // assertResult(true)(hasColumn(df_result, "yAxis"))
 
-    val df_result1 = df_result.features(loadConfigFile("configuration-examples/simple-features.conf"))
+  //  val df_result1 = df_result.features(loadConfigFile("configuration-examples/simple-features.conf"))
 
     /*
     === expected result for one row
@@ -154,11 +154,11 @@ import org.slf4j.{Logger, LoggerFactory}
 |75029551647502955164E05091600072504|05.09.2016 18:17:12|[201.005, 202.0, 203.0, 204.0, 204.0]|[31.165, 31.252, 33.345, 34.44, 35.66]|yAxis_w2_slope===NaN                |
 +-----------------------------------+-------------------+-------------------------------------+--------------------------------------+------------------------------------+
   */ assertResult(30) {
-      df_result1.count()
+     // df_result1.count()
     }
 
     assertResult(18) {
-      df_result1.filter((col("yAxis_features_group").contains("max") || col("yAxis_features_group").contains("min") || col("yAxis_features_group").contains("var") || col("yAxis_features_group").contains("mean") || col("yAxis_features_group").contains("std") || col("yAxis_features_group").contains("slope")) && col("partNumber") === "75029551647502955164E05091600072504").count()
+     // df_result1.filter((col("yAxis_features_group").contains("max") || col("yAxis_features_group").contains("min") || col("yAxis_features_group").contains("var") || col("yAxis_features_group").contains("mean") || col("yAxis_features_group").contains("std") || col("yAxis_features_group").contains("slope")) && col("partNumber") === "75029551647502955164E05091600072504").count()
     }
 
   }

@@ -2,7 +2,14 @@
 
 Describe your solution here.
 
-TODO: Please explain your solution briefly and highlight the advantages and disadvantages of your implementation. Will it scale for a large number of tests?
+Rima's Comment:
+Tried to explode the yAxisArray and calculated the aggregation functions on top of that.
+If one input file with data has been provided, it would have been helped a little bit more.
+Changes are there in below files:
+1.	FeatureExtraction.scala
+2.	Features.scala
+3.	FeaturesModule.scala
+
 
 ## <a name="configuration">Configuration</a>
 If you change the configuration file please specify 

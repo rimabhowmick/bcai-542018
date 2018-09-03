@@ -2,7 +2,13 @@
 
 Describe your solution here.
 
-TODO: Please explain your solution briefly and highlight the advantages and disadvantages of your implementation. Will it scale for a large number of tests?
+Rima's Comment:
+Got the merged results from both the .csv files, but could not get any matching relationship in between the datasets.
+However tried to reach the output, almost matching with expected. Would have been better if some details to link the two datasets would have been provided.
+1.	Communicataion.scala
+2.	CommunicationModule.scala
+3.	CommunicationDataTest.scala
+
 
 ## <a name="configuration">Configuration</a>
 If you change the configuration file please specify 
