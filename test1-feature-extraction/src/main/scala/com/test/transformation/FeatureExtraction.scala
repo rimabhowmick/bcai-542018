@@ -2,6 +2,7 @@ package com.test.transformation
 
 import org.apache.spark.sql.SparkSession
 import org.slf4j.{Logger, LoggerFactory}
+import com.test.transformation.Features._
 
 /**
   * Created by kumaraswamy on 9/13/17.
@@ -9,7 +10,7 @@ import org.slf4j.{Logger, LoggerFactory}
 object FeatureExtraction {
   val logger: Logger = LoggerFactory.getLogger(getClass)
   private val AppName = "FeatureExtraction"
-
+  case class FourColumns(partNumber: String, timeStamp: String, xAxis: Array[Double], yAxis: Array[Double])
   def main(args: Array[String]) {
     // Check arguments */
     if (args.length < 5) {

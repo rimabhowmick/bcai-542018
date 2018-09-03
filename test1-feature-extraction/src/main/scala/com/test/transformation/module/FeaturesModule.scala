@@ -2,7 +2,7 @@ package com.test.transformation.module
 
 import org.apache.spark.sql.DataFrame
 import org.slf4j.{Logger, LoggerFactory}
-
+import org.apache.spark.sql.functions.explode
 import scala.language.implicitConversions
 
 /**
