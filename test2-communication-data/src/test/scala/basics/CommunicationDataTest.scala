@@ -30,23 +30,28 @@ import org.slf4j.{Logger, LoggerFactory}
   }
 
   @Test def SimpleTest(): Unit = {
+    val sc = spark.sparkContext
+    val sqlContext =new org.apache.spark.sql.SQLContext(sc)
 
-    // Read file data/comm-data.csv to df
-    // Read file data/park-movement.csv to df
-    // Get communication details between users
-    /*
-    === expected result
-+----------------------+-------+---------------+-------+-------+-------+---------------+-------+-------+------------+
-|Timestamp	           |from   |from_type      |from_X |from_Y |to     |to_type	       |to_X   |to_Y   |location    |
-+----------------------+-------+---------------+-------+-------+-------+---------------+-------+-------+------------+
-|2014-06-06 08:00:21   |1591741|check-in       |63     |99     |825652 |check-in       |63     |99     |Kiddie Land |
-|2014-06-06 08:05:34   |1591741|check-in       |60     |90     |675561 |check-in       |99     |77     |Kiddie Land |
-|2014-06-06 08:10:16   |1483004|check-in       |-1     |-1     |825653 |check-in       |22     |22     |Kiddie Land |
-|2014-06-06 08:00:00   |1591741|check-in       |-1     |-1     |825652 |check-in       |-1     |-1     |Kiddie Land |
-|2014-06-06 08:29:51   |675561 |check-in       |11     |11     |1483004|check-in       |-1     |-1     |Kiddie Land |
-+----------------------+-------+---------------+-------+-------+-------+---------------+-------+-------+------------+
-    */
-    // unit test cases
+    sqlContext.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("src/test/resources/data/comm-data.csv").registerTempTable("table1")
+    sqlContext.read.format("com.databricks.spark.csv").option("header", "true").option("inferSchema", "true").load("src/test/resources/data/park-movement.csv").registerTempTable("table2")
+
+    var df = sqlContext.sparkSession.emptyDataFrame
+    sqlContext.sql("select t1.timestamp, t1.from "+
+      ", t2.type as from_type "+
+      ", t2.X as from_x "+
+      ", t2.Y as from_y "+
+      ", t1.to "+
+      ", t2_1.type to_type "+
+      ", t2_1.X as to_x "+
+      ", t2_1.Y as to_y "+
+      ", t1.location "+
+      "from table1 t1 "+
+      ", table2 t2 "+
+      ", table2 t2_1 "+
+      "  where t1.from = t2.id "+
+      "and t1.to = t2_1.id").show()
+
   }
 
 
